@@ -80,5 +80,38 @@
             <a href="https://t.me/verynefor" target="_blank" class="tg-footer">Telegram: @verynefor</a>
         </div>
     </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим все карточки услуг (по классу card)
+        const cards = document.querySelectorAll('.card');
+        // Находим все ссылки на Telegram на странице (по содержанию @verynefor или t.me)
+        const tgLinks = Array.from(document.querySelectorAll('a')).filter(a => 
+            a.href.includes('t.me/verynefor') || a.innerText.includes('@verynefor')
+        );
+        
+        cards.forEach(card => {
+            card.addEventListener('dblclick', function() {
+                if (tgLinks.length > 0) {
+                    // Прокручиваем к первой найденной ссылке
+                    tgLinks[0].scrollIntoView({ behavior: 'smooth' });
+                    // Подсвечиваем ссылку
+                    tgLinks[0].style.transition = 'background-color 0.3s';
+                    tgLinks[0].style.backgroundColor = '#ffd966';
+                    tgLinks[0].style.color = '#000';
+                    tgLinks[0].style.padding = '2px 5px';
+                    tgLinks[0].style.borderRadius = '8px';
+                    setTimeout(() => {
+                        tgLinks[0].style.backgroundColor = '';
+                        tgLinks[0].style.color = '';
+                        tgLinks[0].style.padding = '';
+                        tgLinks[0].style.borderRadius = '';
+                    }, 2000);
+                }
+            });
+            // Делаем курсор указателем (опционально, можно удалить)
+            card.style.cursor = 'pointer';
+        });
+    });
+</script>
 </body>
 </html>
